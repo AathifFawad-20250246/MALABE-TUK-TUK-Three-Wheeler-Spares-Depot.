@@ -1,16 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.malabetuktuk.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.malabetuktuk.HelloController">
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+    <top>
+        <Label text="MALABE TUK TUK - Inventory System"
+               style="-fx-font-size:20px; -fx-padding:10;"/>
+    </top>
+
+    <center>
+        <TableView fx:id="inventoryTable" prefHeight="500" prefWidth="800">
+
+            <columns>
+
+                <TableColumn fx:id="codeColumn" text="Part Code" prefWidth="100"/>
+
+                <TableColumn fx:id="nameColumn" text="Part Name" prefWidth="200"/>
+
+                <TableColumn fx:id="brandColumn" text="Brand" prefWidth="120"/>
+
+                <TableColumn fx:id="priceColumn" text="Price" prefWidth="100"/>
+
+                <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="100"/>
+
+                <TableColumn fx:id="categoryColumn" text="Category" prefWidth="150"/>
+
+            </columns>
+
+        </TableView>
+    </center>
+
+    <bottom>
+        <HBox spacing="10" style="-fx-padding:10;">
+
+            <Button text="Load Inventory"
+                    onAction="#loadInventory"/>
+
+            <Button text="Add"/>
+
+            <Button text="Update"/>
+
+            <Button text="Delete"/>
+
+            <Button text="Search"/>
+
+        </HBox>
+    </bottom>
+
+</BorderPane>

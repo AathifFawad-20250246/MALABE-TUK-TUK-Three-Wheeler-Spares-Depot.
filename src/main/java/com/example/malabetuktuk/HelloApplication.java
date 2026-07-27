@@ -13,13 +13,16 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
 
         FileManager.readInventoryFile();
+        FileManager.readDealerFile();
+
+        AuditLogger.log("Program Started");
 
         FXMLLoader fxmlLoader = new FXMLLoader(
                 HelloApplication.class.getResource("hello-view.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
 
-        stage.setTitle("Hello!");
+        stage.setTitle("MALABE TUK TUK Inventory System");
 
         stage.setScene(scene);
 
