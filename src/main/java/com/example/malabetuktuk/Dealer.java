@@ -25,7 +25,7 @@ public class Dealer {
         return dealerName;
     }
 
-    public String getPhoneNumber() {
+    public String getPhone() {
         return phoneNumber;
     }
 

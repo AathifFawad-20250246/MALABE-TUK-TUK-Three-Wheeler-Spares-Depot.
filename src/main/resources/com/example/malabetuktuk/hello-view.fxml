@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.malabetuktuk.HelloController">
 
@@ -12,42 +13,134 @@
     </top>
 
     <center>
-        <TableView fx:id="inventoryTable" prefHeight="500" prefWidth="800">
 
-            <columns>
+        <SplitPane orientation="VERTICAL">
 
-                <TableColumn fx:id="codeColumn" text="Part Code" prefWidth="100"/>
+            <items>
 
-                <TableColumn fx:id="nameColumn" text="Part Name" prefWidth="200"/>
+                <TableView fx:id="inventoryTable"
+                           onMouseClicked="#selectPart">
 
-                <TableColumn fx:id="brandColumn" text="Brand" prefWidth="120"/>
+                    <columns>
 
-                <TableColumn fx:id="priceColumn" text="Price" prefWidth="100"/>
+                        <TableColumn fx:id="codeColumn" text="Part Code" prefWidth="100"/>
+                        <TableColumn fx:id="nameColumn" text="Part Name" prefWidth="200"/>
+                        <TableColumn fx:id="brandColumn" text="Brand" prefWidth="120"/>
+                        <TableColumn fx:id="priceColumn" text="Price" prefWidth="100"/>
+                        <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="100"/>
+                        <TableColumn fx:id="categoryColumn" text="Category" prefWidth="150"/>
 
-                <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="100"/>
+                    </columns>
 
-                <TableColumn fx:id="categoryColumn" text="Category" prefWidth="150"/>
+                </TableView>
 
-            </columns>
+                <TableView fx:id="dealerTable"
+                           onMouseClicked="#selectDealer">
 
-        </TableView>
+                    <columns>
+
+                        <TableColumn fx:id="dealerIdColumn" text="Dealer ID"/>
+                        <TableColumn fx:id="dealerNameColumn" text="Dealer Name"/>
+                        <TableColumn fx:id="phoneColumn" text="Phone"/>
+                        <TableColumn fx:id="locationColumn" text="Location"/>
+
+                    </columns>
+
+                </TableView>
+
+            </items>
+
+        </SplitPane>
+
     </center>
 
     <bottom>
-        <HBox spacing="10" style="-fx-padding:10;">
+        <VBox spacing="10" style="-fx-padding:10;">
 
-            <Button text="Load Inventory"
-                    onAction="#loadInventory"/>
+            <HBox spacing="10">
 
-            <Button text="Add"/>
+                <TextField fx:id="codeField" promptText="Part Code"/>
 
-            <Button text="Update"/>
+                <TextField fx:id="nameField" promptText="Part Name"/>
 
-            <Button text="Delete"/>
+                <TextField fx:id="brandField" promptText="Brand"/>
 
-            <Button text="Search"/>
+                <TextField fx:id="priceField" promptText="Price"/>
 
-        </HBox>
+                <TextField fx:id="quantityField" promptText="Quantity"/>
+
+                <TextField fx:id="categoryField" promptText="Category"/>
+
+            </HBox>
+
+            <HBox spacing="10">
+
+                <TextField fx:id="dealerIdField" promptText="Dealer ID"/>
+
+                <TextField fx:id="dealerNameField" promptText="Dealer Name"/>
+
+                <TextField fx:id="phoneField" promptText="Phone"/>
+
+                <TextField fx:id="locationField" promptText="Location"/>
+
+            </HBox>
+
+            <HBox spacing="10">
+
+                <Button text="Load Inventory"
+                        onAction="#loadInventory"/>
+
+                <Button text="Add Part"
+                        onAction="#addPart"/>
+
+                <Button text="Update"
+                        onAction="#updatePart"/>
+
+                <Button text="Delete"
+                        onAction="#deletePart"/>
+
+                <TextField fx:id="searchField"
+                           promptText="Search..."/>
+
+                <Button text="Search"
+                        onAction="#searchPart"/>
+
+                <Button text="Sort"
+                        onAction="#sortParts"/>
+
+                <Button text="Low Stock"
+                        onAction="#showLowStock"/>
+
+            </HBox>
+
+            <HBox spacing="10">
+
+                <Button text="Load Dealers"
+                        onAction="#loadDealers"/>
+
+                <Button text="Add Dealer"
+                        onAction="#addDealer"/>
+
+                <Button text="Update Dealer"
+                        onAction="#updateDealer"/>
+
+                <Button text="Delete Dealer"
+                        onAction="#deleteDealer"/>
+
+                <Button text="Random Dealer"
+                        onAction="#randomDealer"/>
+
+            </HBox>
+
+            <Button text="Load Dealers"
+                    onAction="#loadDealers"/>
+
+            <Button text="Random Dealer"
+                    onAction="#randomDealer"/>
+
+        </VBox>
     </bottom>
 
 </BorderPane>
+
+

@@ -150,4 +150,34 @@ public class FileManager {
 
         return dealerList;
     }
+
+    public static void saveDealerFile(java.util.List<Dealer> dealers) {
+
+        try {
+
+            java.io.PrintWriter writer =
+                    new java.io.PrintWriter("src/main/resources/data/dealers_legacy.txt");
+
+            for (Dealer dealer : dealers) {
+
+                writer.println(
+                        dealer.getDealerId() + "," +
+                                dealer.getDealerName() + "," +
+                                dealer.getPhone() + "," +
+                                dealer.getLocation()
+                );
+
+            }
+
+            writer.close();
+
+            System.out.println("Dealer file saved.");
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
 }
