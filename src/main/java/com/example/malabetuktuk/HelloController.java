@@ -9,9 +9,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Label;
+import java.util.ArrayList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
 
 
 public class HelloController {
+    private static final int LOW_STOCK_THRESHOLD = 10;
 
     @FXML
     private TableView<Part> inventoryTable;
@@ -86,6 +93,48 @@ public class HelloController {
     private TextField dealerSearchField;
 
     @FXML
+    private Label lowStockLabel;
+
+    @FXML
+    private Label totalPartsLabel;
+
+    @FXML
+    private Label totalValueLabel;
+
+    @FXML
+    private TextField searchName;
+
+    @FXML
+    private TextField searchCategory;
+
+    @FXML
+    private TextField searchPrice;
+
+    @FXML
+    private TableView<CartItem> cartTable;
+
+    @FXML
+    private TableColumn<CartItem, String> cartPartColumn;
+
+    @FXML
+    private TableColumn<CartItem, Integer> cartQuantityColumn;
+
+    @FXML
+    private TableColumn<CartItem, Double> cartPriceColumn;
+
+    @FXML
+    private TextField cartQuantityField;
+
+    @FXML
+    private Label cartTotalLabel;
+
+    @FXML
+    private TextField discountField;
+
+
+    private ShoppingCart shoppingCart = new ShoppingCart();
+
+    @FXML
     public void initialize() {
 
         codeColumn.setCellValueFactory(cellData ->
@@ -123,6 +172,29 @@ public class HelloController {
 
         locationColumn.setCellValueFactory(
                 new PropertyValueFactory<>("location"));
+
+        cartPartColumn.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleStringProperty(
+                        cellData.getValue()
+                                .getPart()
+                                .getPartName()
+                ));
+
+
+        cartQuantityColumn.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleIntegerProperty(
+                        cellData.getValue()
+                                .getQuantity()
+                ).asObject());
+
+
+        cartPriceColumn.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleDoubleProperty(
+                        cellData.getValue()
+                                .getSubtotal()
+                ).asObject());
+
+
     }
 
     @FXML
@@ -137,6 +209,40 @@ public class HelloController {
         inventoryTable.getItems().addAll(parts);
 
         System.out.println("Rows in table = " + inventoryTable.getItems().size());
+
+        showTotalParts();
+        showTotalInventoryValue();
+    }
+
+    @FXML
+    public void groupInventory() {
+
+        inventoryTable.getItems().clear();
+
+        java.util.ArrayList<Part> parts = FileManager.readInventoryFile();
+
+        for (int i = 0; i < parts.size() - 1; i++) {
+
+            for (int j = 0; j < parts.size() - i - 1; j++) {
+
+                Part p1 = parts.get(j);
+                Part p2 = parts.get(j + 1);
+
+                int categoryCompare = p1.getCategory().compareToIgnoreCase(p2.getCategory());
+
+                if (categoryCompare > 0 ||
+                        (categoryCompare == 0 &&
+                                p1.getPartCode().compareToIgnoreCase(p2.getPartCode()) > 0)) {
+
+                    parts.set(j, p2);
+                    parts.set(j + 1, p1);
+
+                }
+            }
+        }
+
+        inventoryTable.getItems().addAll(parts);
+
     }
 
     @FXML
@@ -155,19 +261,41 @@ public class HelloController {
     @FXML
     public void randomDealer() {
 
-        if (dealerTable.getItems().isEmpty()) {
+        dealerTable.getItems().clear();
 
-            loadDealers();
+
+        ArrayList<Dealer> dealers =
+                FileManager.readDealerFile();
+
+
+        // Shuffle dealers randomly
+        java.util.Collections.shuffle(dealers);
+
+
+        // Display random 4 dealers
+        if (dealers.size() >= 4) {
+
+            dealerTable.getItems().addAll(
+                    dealers.subList(0, 4)
+            );
+
+        } else {
+
+            dealerTable.getItems().addAll(dealers);
 
         }
 
-        int random = (int) (Math.random() * dealerTable.getItems().size());
 
-        dealerTable.getSelectionModel().select(random);
+        AuditLogger.log("Random 4 Dealers Selected");
 
-        Dealer dealer = dealerTable.getSelectionModel().getSelectedItem();
 
-        System.out.println("Selected Dealer: " + dealer.getDealerName());
+        System.out.println("Random 4 Dealers:");
+
+        for (Dealer dealer : dealerTable.getItems()) {
+
+            System.out.println(dealer.getDealerName());
+
+        }
 
     }
 
@@ -215,6 +343,8 @@ public class HelloController {
 
         }
 
+        showLowStock();
+
     }
 
     @FXML
@@ -255,6 +385,8 @@ public class HelloController {
 
         }
 
+        showLowStock();
+
     }
 
     @FXML
@@ -293,6 +425,8 @@ public class HelloController {
             System.out.println("Please select a part to delete.");
 
         }
+
+        showLowStock();
     }
 
     @FXML
@@ -352,17 +486,21 @@ public class HelloController {
 
         inventoryTable.getItems().clear();
 
+        int count = 0;
+
         for (Part part : FileManager.readInventoryFile()) {
 
-            if (part.getQuantity() < 5) {
+            if (part.getQuantity() < LOW_STOCK_THRESHOLD) {
 
                 inventoryTable.getItems().add(part);
+
+                count++;
 
             }
 
         }
 
-        AuditLogger.log("Viewed Low Stock Parts");
+        lowStockLabel.setText("Low Stock Items : " + count);
 
     }
 
@@ -479,4 +617,169 @@ public class HelloController {
         AuditLogger.log("Dealer Search");
     }
 
+    @FXML
+    public void showTotalParts() {
+
+        int total = FileManager.readInventoryFile().size();
+
+        totalPartsLabel.setText("Total Parts : " + total);
+
+    }
+
+    @FXML
+    public void showTotalInventoryValue() {
+
+        double totalValue = 0;
+
+        for (Part part : FileManager.readInventoryFile()) {
+
+            totalValue += part.getPrice() * part.getQuantity();
+
+        }
+
+        totalValueLabel.setText(
+                String.format("Total Inventory Value : Rs. %.2f", totalValue)
+        );
+
+    }
+
+    @FXML
+    public void addToCart() {
+
+
+        Part selectedPart =
+                inventoryTable.getSelectionModel()
+                        .getSelectedItem();
+
+
+        if (selectedPart == null) {
+
+            System.out.println("Select a part first");
+
+            return;
+
+        }
+
+
+        int quantity;
+
+
+        try {
+
+            quantity = Integer.parseInt(
+                    cartQuantityField.getText()
+            );
+
+
+        } catch (Exception e) {
+
+            System.out.println("Invalid quantity");
+
+            return;
+
+        }
+
+
+        shoppingCart.addItem(
+                selectedPart,
+                quantity
+        );
+
+
+        cartTable.getItems().clear();
+
+
+        cartTable.getItems().addAll(
+                shoppingCart.getItems()
+        );
+
+
+        updateCartTotal();
+
+
+        AuditLogger.log(
+                "Part Added To Cart"
+        );
+
+    }
+
+    public void updateCartTotal() {
+
+        double total =
+                shoppingCart.getTotal();
+
+
+        cartTotalLabel.setText(
+                String.format(
+                        "Total: Rs %.2f",
+                        total
+                )
+        );
+
+    }
+
+    @FXML
+    public void clearCart() {
+
+        shoppingCart.clearCart();
+
+        cartTable.getItems().clear();
+
+        cartTotalLabel.setText("Total: Rs.0.00");
+
+    }
+
+    @FXML
+    public void applyDiscount() {
+
+        String discountText = discountField.getText().trim();
+
+        if (discountText.isEmpty()) {
+
+            System.out.println("Enter discount percentage");
+
+            return;
+        }
+
+
+        try {
+
+            double discount = Double.parseDouble(discountText);
+
+
+            double finalTotal =
+                    shoppingCart.calculateDiscount(discount);
+
+
+            cartTotalLabel.setText(
+                    "Total after discount: Rs. "
+                            + String.format("%.2f", finalTotal)
+            );
+
+
+        } catch (NumberFormatException e) {
+
+            System.out.println("Invalid discount value");
+
+        }
+
+    }
+
+    @FXML
+    public void checkout() {
+
+        double finalTotal =
+                shoppingCart.calculateCheckoutTotal();
+
+
+        cartTotalLabel.setText(
+                "Final Checkout: Rs. " + finalTotal
+        );
+
+
+        System.out.println(
+                "Final Checkout: Rs. " + finalTotal
+        );
+
+    }
 }

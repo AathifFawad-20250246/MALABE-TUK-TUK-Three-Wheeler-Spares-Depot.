@@ -23,4 +23,37 @@ public class InventoryManager {
             System.out.println(part);
         }
     }
+
+
+    // Multi Criteria Search (3 Filters)
+    public ArrayList<Part> multiCriteriaSearch(
+            String name,
+            String category,
+            double maxPrice) {
+
+        ArrayList<Part> results = new ArrayList<>();
+
+        for (Part part : partList) {
+
+            boolean matchName = name.isEmpty() ||
+                    part.getPartName()
+                            .toLowerCase()
+                            .contains(name.toLowerCase());
+
+
+            boolean matchCategory = category.isEmpty() ||
+                    part.getCategory()
+                            .equalsIgnoreCase(category);
+
+
+            boolean matchPrice = part.getPrice() <= maxPrice;
+
+
+            if(matchName && matchCategory && matchPrice) {
+                results.add(part);
+            }
+        }
+
+        return results;
+    }
 }

@@ -48,6 +48,26 @@
 
                 </TableView>
 
+                <TableView fx:id="cartTable">
+
+                    <columns>
+
+                        <TableColumn fx:id="cartPartColumn"
+                                     text="Part Name"
+                                     prefWidth="200"/>
+
+                        <TableColumn fx:id="cartQuantityColumn"
+                                     text="Quantity"
+                                     prefWidth="100"/>
+
+                        <TableColumn fx:id="cartPriceColumn"
+                                     text="Total Price"
+                                     prefWidth="150"/>
+
+                    </columns>
+
+                </TableView>
+
             </items>
 
         </SplitPane>
@@ -90,8 +110,37 @@
 
             <HBox spacing="10">
 
+                <TextField fx:id="cartQuantityField"
+                           promptText="Cart Quantity"/>
+
+                <Button text="Add To Cart"
+                        onAction="#addToCart"/>
+
+                <Button text="Clear Cart"
+                        onAction="#clearCart"/>
+
+                <Button text="Checkout"
+                        onAction="#checkout"/>
+
+                <TextField fx:id="discountField"
+                        promptText="Enter discount %"/>
+
+                <Button text="Apply Discount"
+                        onAction="#applyDiscount"/>
+
+            </HBox>
+
+
+            <Label fx:id="cartTotalLabel"
+                   text="Total: Rs.0.00"/>
+
+            <HBox spacing="10">
+
                 <Button text="Load Inventory"
                         onAction="#loadInventory"/>
+
+                <Button text="Group Inventory"
+                        onAction="#groupInventory"/>
 
                 <Button text="Add Part"
                         onAction="#addPart"/>
@@ -114,7 +163,22 @@
                 <Button text="Low Stock"
                         onAction="#showLowStock"/>
 
+                <Button text="Total Parts"
+                        onAction="#showTotalParts"/>
+
+                <Button text="Inventory Value"
+                        onAction="#showTotalInventoryValue"/>
+
             </HBox>
+
+            <Label fx:id="lowStockLabel"
+                   text="Low Stock Items : 0"/>
+
+            <Label fx:id="totalPartsLabel"
+                   text="Total Parts : 0"/>
+
+            <Label fx:id="totalValueLabel"
+                   text="Total Inventory Value : Rs. 0.00"/>
 
             <HBox spacing="10">
 

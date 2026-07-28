@@ -21,4 +21,17 @@ public class CartItem {
     public double getSubtotal() {
         return part.getPrice() * quantity;
     }
+
+    public double getDiscountedTotal(){
+
+        double subtotal = part.getPrice() * quantity;
+
+        if(quantity >= 3){
+
+            subtotal = subtotal * 0.95; // 5% discount
+
+        }
+
+        return subtotal;
+    }
 }
