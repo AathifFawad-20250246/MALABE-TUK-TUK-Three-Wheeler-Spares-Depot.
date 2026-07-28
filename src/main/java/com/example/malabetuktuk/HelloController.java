@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+
 public class HelloController {
 
     @FXML
@@ -80,6 +81,9 @@ public class HelloController {
 
     @FXML
     private TextField locationField;
+
+    @FXML
+    private TextField dealerSearchField;
 
     @FXML
     public void initialize() {
@@ -194,6 +198,10 @@ public class HelloController {
 
             inventoryTable.getItems().add(part);
 
+            FileManager.saveInventoryFile(inventoryTable.getItems());
+
+            AuditLogger.log("Part Added");
+
             codeField.clear();
             nameField.clear();
             brandField.clear();
@@ -241,6 +249,10 @@ public class HelloController {
 
             inventoryTable.refresh();
 
+            FileManager.saveInventoryFile(inventoryTable.getItems());
+
+            AuditLogger.log("Part Updated");
+
         }
 
     }
@@ -260,6 +272,10 @@ public class HelloController {
             if (alert.showAndWait().get() == ButtonType.OK) {
 
                 inventoryTable.getItems().remove(selectedPart);
+
+                FileManager.saveInventoryFile(inventoryTable.getItems());
+
+                AuditLogger.log("Part Deleted");
 
             }
 
@@ -282,23 +298,23 @@ public class HelloController {
     @FXML
     public void searchPart() {
 
-        String keyword = searchField.getText().toLowerCase();
+        String search = searchField.getText().toLowerCase();
 
         inventoryTable.getItems().clear();
 
         for (Part part : FileManager.readInventoryFile()) {
 
-            if (part.getPartCode().toLowerCase().contains(keyword)
-                    || part.getPartName().toLowerCase().contains(keyword)
-                    || part.getBrand().toLowerCase().contains(keyword)
-                    || part.getCategory().toLowerCase().contains(keyword)) {
+            if (part.getPartCode().toLowerCase().contains(search) ||
+                    part.getPartName().toLowerCase().contains(search) ||
+                    part.getBrand().toLowerCase().contains(search) ||
+                    part.getCategory().toLowerCase().contains(search)) {
 
                 inventoryTable.getItems().add(part);
 
             }
-
         }
 
+        AuditLogger.log("Inventory Search");
     }
 
     @FXML
@@ -440,4 +456,27 @@ public class HelloController {
         locationField.setText(dealer.getLocation());
 
     }
+
+    @FXML
+    public void searchDealer() {
+
+        String search = dealerSearchField.getText().toLowerCase();
+
+        dealerTable.getItems().clear();
+
+        for (Dealer dealer : FileManager.readDealerFile()) {
+
+            if (dealer.getDealerId().toLowerCase().contains(search) ||
+                    dealer.getDealerName().toLowerCase().contains(search) ||
+                    dealer.getPhone().toLowerCase().contains(search) ||
+                    dealer.getLocation().toLowerCase().contains(search)) {
+
+                dealerTable.getItems().add(dealer);
+
+            }
+        }
+
+        AuditLogger.log("Dealer Search");
+    }
+
 }

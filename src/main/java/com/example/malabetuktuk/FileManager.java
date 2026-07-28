@@ -21,6 +21,11 @@ public class FileManager {
 
                 System.out.println("Reading: " + line);
 
+
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+
                 line = line.replace("|", ",");
                 line = line.replace(";", ",");
 
@@ -28,6 +33,11 @@ public class FileManager {
 
                 for (int i = 0; i < data.length; i++) {
                     data[i] = data[i].trim();
+                }
+
+
+                if (data.length < 7 || data[0].isEmpty()) {
+                    continue;
                 }
 
                 System.out.println("Fields: " + data.length);
@@ -107,6 +117,11 @@ public class FileManager {
 
             while ((line = reader.readLine()) != null) {
 
+
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+
                 line = line.replace("|", ",");
                 line = line.replace(";", ",");
 
@@ -116,16 +131,14 @@ public class FileManager {
                     data[i] = data[i].trim();
                 }
 
+                if (data.length < 4 || data[0].isEmpty()) {
+                    continue;
+                }
+
                 String dealerId = data[0];
                 String dealerName = data[1];
-
-                String phone = "";
-                String location = "";
-
-                if (data.length >= 4) {
-                    phone = data[2];
-                    location = data[3];
-                }
+                String phone = data[2];
+                String location = data[3];
 
                 Dealer dealer = new Dealer(
                         dealerId,
@@ -137,7 +150,6 @@ public class FileManager {
                 dealerList.add(dealer);
 
                 System.out.println(dealer);
-
             }
 
             reader.close();
@@ -179,5 +191,38 @@ public class FileManager {
 
         }
 
+    }
+
+    public static void saveInventoryFile(java.util.List<Part> parts) {
+
+        try {
+
+            java.io.PrintWriter writer =
+                    new java.io.PrintWriter("src/main/resources/data/inventory_legacy.txt");
+
+            for (Part part : parts) {
+
+                writer.println(
+                        part.getPartCode() + "," +
+                                part.getPartName() + "," +
+                                part.getBrand() + "," +
+                                part.getPrice() + "," +
+                                part.getQuantity() + "," +
+                                part.getCategory() + "," +
+                                part.getDateAdded() + "," +
+                                part.getImageName()
+                );
+
+            }
+
+            writer.close();
+
+            System.out.println("Inventory file saved.");
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
     }
 }
