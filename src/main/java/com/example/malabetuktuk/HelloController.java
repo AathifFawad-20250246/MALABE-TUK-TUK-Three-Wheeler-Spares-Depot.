@@ -685,6 +685,13 @@ public class HelloController {
                 quantity
         );
 
+        AuditLogger.log(
+                "Added to cart: "
+                        + selectedPart.getPartName()
+                        + " Quantity: "
+                        + quantity
+        );
+
 
         cartTable.getItems().clear();
 
@@ -774,6 +781,11 @@ public class HelloController {
 
         cartTotalLabel.setText(
                 "Final Checkout: Rs. " + finalTotal
+        );
+
+        AuditLogger.log(
+                "Checkout completed. Total: Rs. "
+                        + finalTotal
         );
 
 

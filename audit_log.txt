@@ -144,3 +144,10 @@ Part Added To Cart
 Part Added To Cart
 Part Added To Cart
 Part Added To Cart
+2026-07-28T18:40:49.613650900 : Program Started
+2026-07-28T18:41:05.328327 : Added to cart: Bajaj 4-Stroke Piston Quantity: 1
+2026-07-28T18:41:05.328327 : Part Added To Cart
+2026-07-28T18:41:07.121710 : Added to cart: Bajaj 4-Stroke Piston Quantity: 1
+2026-07-28T18:41:07.123701300 : Part Added To Cart
+2026-07-28T18:41:08.174528200 : Checkout completed. Total: Rs. 9000.0
+2026-07-28T18:48:59.585560500 : JUnit Test Log
