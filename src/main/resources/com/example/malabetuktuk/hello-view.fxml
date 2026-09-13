@@ -3,211 +3,396 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.malabetuktuk.HelloController">
 
+    <!-- TOP -->
     <top>
-        <Label text="MALABE TUK TUK - Inventory System"
-               style="-fx-font-size:20px; -fx-padding:10;"/>
+        <VBox alignment="CENTER" spacing="5"
+              style="-fx-padding:15;">
+
+            <Label text="MALABE TUK TUK"
+                   style="-fx-font-size:24px; -fx-font-weight:bold;"/>
+
+            <Label text="Inventory &amp; Dealer Management System"
+                   style="-fx-font-size:14px;"/>
+        </VBox>
     </top>
 
+
+    <!-- CENTER -->
     <center>
 
-        <SplitPane orientation="VERTICAL">
+        <TabPane>
 
-            <items>
+            <!-- ================= INVENTORY TAB ================= -->
+            <Tab text="Inventory">
 
-                <TableView fx:id="inventoryTable"
-                           onMouseClicked="#selectPart">
+                <VBox spacing="10"
+                      style="-fx-padding:10;">
 
-                    <columns>
+                    <Label text="Inventory Management"
+                           style="-fx-font-size:18px; -fx-font-weight:bold;"/>
 
-                        <TableColumn fx:id="codeColumn" text="Part Code" prefWidth="100"/>
-                        <TableColumn fx:id="nameColumn" text="Part Name" prefWidth="200"/>
-                        <TableColumn fx:id="brandColumn" text="Brand" prefWidth="120"/>
-                        <TableColumn fx:id="priceColumn" text="Price" prefWidth="100"/>
-                        <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="100"/>
-                        <TableColumn fx:id="categoryColumn" text="Category" prefWidth="150"/>
+                    <!-- Inventory Table -->
+                    <TableView fx:id="inventoryTable"
+                               onMouseClicked="#selectPart"
+                               VBox.vgrow="ALWAYS">
 
-                    </columns>
+                        <columns>
 
-                </TableView>
+                            <TableColumn fx:id="codeColumn"
+                                         text="Part Code"
+                                         prefWidth="100"/>
 
-                <TableView fx:id="dealerTable"
-                           onMouseClicked="#selectDealer">
+                            <TableColumn fx:id="nameColumn"
+                                         text="Part Name"
+                                         prefWidth="220"/>
 
-                    <columns>
+                            <TableColumn fx:id="brandColumn"
+                                         text="Brand"
+                                         prefWidth="120"/>
 
-                        <TableColumn fx:id="dealerIdColumn" text="Dealer ID"/>
-                        <TableColumn fx:id="dealerNameColumn" text="Dealer Name"/>
-                        <TableColumn fx:id="phoneColumn" text="Phone"/>
-                        <TableColumn fx:id="locationColumn" text="Location"/>
+                            <TableColumn fx:id="priceColumn"
+                                         text="Price"
+                                         prefWidth="100"/>
 
-                    </columns>
+                            <TableColumn fx:id="quantityColumn"
+                                         text="Quantity"
+                                         prefWidth="100"/>
 
-                </TableView>
+                            <TableColumn fx:id="categoryColumn"
+                                         text="Category"
+                                         prefWidth="130"/>
 
-                <TableView fx:id="cartTable">
+                        </columns>
 
-                    <columns>
+                    </TableView>
 
-                        <TableColumn fx:id="cartPartColumn"
-                                     text="Part Name"
-                                     prefWidth="200"/>
 
-                        <TableColumn fx:id="cartQuantityColumn"
-                                     text="Quantity"
-                                     prefWidth="100"/>
+                    <!-- Inventory Input Fields -->
+                    <GridPane hgap="8" vgap="8">
 
-                        <TableColumn fx:id="cartPriceColumn"
-                                     text="Total Price"
-                                     prefWidth="150"/>
+                        <Label text="Part Code:" GridPane.rowIndex="0"
+                               GridPane.columnIndex="0"/>
 
-                    </columns>
+                        <TextField fx:id="codeField"
+                                   promptText="P001"
+                                   GridPane.rowIndex="0"
+                                   GridPane.columnIndex="1"/>
 
-                </TableView>
+                        <Label text="Part Name:" GridPane.rowIndex="0"
+                               GridPane.columnIndex="2"/>
 
-            </items>
+                        <TextField fx:id="nameField"
+                                   promptText="Part name"
+                                   GridPane.rowIndex="0"
+                                   GridPane.columnIndex="3"/>
 
-        </SplitPane>
+
+                        <Label text="Brand:" GridPane.rowIndex="1"
+                               GridPane.columnIndex="0"/>
+
+                        <TextField fx:id="brandField"
+                                   promptText="Brand"
+                                   GridPane.rowIndex="1"
+                                   GridPane.columnIndex="1"/>
+
+                        <Label text="Price:" GridPane.rowIndex="1"
+                               GridPane.columnIndex="2"/>
+
+                        <TextField fx:id="priceField"
+                                   promptText="Price"
+                                   GridPane.rowIndex="1"
+                                   GridPane.columnIndex="3"/>
+
+
+                        <Label text="Quantity:" GridPane.rowIndex="2"
+                               GridPane.columnIndex="0"/>
+
+                        <TextField fx:id="quantityField"
+                                   promptText="Quantity"
+                                   GridPane.rowIndex="2"
+                                   GridPane.columnIndex="1"/>
+
+                        <Label text="Category:" GridPane.rowIndex="2"
+                               GridPane.columnIndex="2"/>
+
+                        <TextField fx:id="categoryField"
+                                   promptText="Engine / Electrical / Bodywork"
+                                   GridPane.rowIndex="2"
+                                   GridPane.columnIndex="3"/>
+
+                    </GridPane>
+
+
+                    <!-- Inventory Buttons -->
+                    <HBox spacing="8">
+
+                        <Button text="Load Inventory"
+                                onAction="#loadInventory"/>
+
+                        <Button text="Group Inventory"
+                                onAction="#groupInventory"/>
+
+                        <Button text="Add Part"
+                                onAction="#addPart"/>
+
+                        <Button text="Update"
+                                onAction="#updatePart"/>
+
+                        <Button text="Delete"
+                                onAction="#deletePart"/>
+
+                        <Button text="Sort"
+                                onAction="#sortParts"/>
+
+                        <Button text="Low Stock"
+                                onAction="#showLowStock"/>
+
+                    </HBox>
+
+
+                    <!-- Search -->
+                    <HBox spacing="8">
+
+                        <TextField fx:id="searchField"
+                                   promptText="Search code / name / brand / category"
+                                   HBox.hgrow="ALWAYS"/>
+
+                        <Button text="Search"
+                                onAction="#searchPart"/>
+
+                        <Button text="Total Parts"
+                                onAction="#showTotalParts"/>
+
+                        <Button text="Inventory Value"
+                                onAction="#showTotalInventoryValue"/>
+
+                    </HBox>
+
+
+                    <!-- Inventory Information -->
+                    <HBox spacing="25">
+
+                        <Label fx:id="lowStockLabel"
+                               text="Low Stock Items : 0"/>
+
+                        <Label fx:id="totalPartsLabel"
+                               text="Total Parts : 0"/>
+
+                        <Label fx:id="totalValueLabel"
+                               text="Total Inventory Value : Rs. 0.00"/>
+
+                    </HBox>
+
+                </VBox>
+
+            </Tab>
+
+
+            <!-- ================= DEALER TAB ================= -->
+            <Tab text="Dealers">
+
+                <VBox spacing="12"
+                      style="-fx-padding:15;">
+
+                    <Label text="Dealer Management"
+                           style="-fx-font-size:20px; -fx-font-weight:bold;"/>
+
+                    <Label text="Manage dealer information"
+                           style="-fx-font-size:13px;"/>
+
+
+                    <!-- Dealer Table -->
+                    <TableView fx:id="dealerTable"
+                               onMouseClicked="#selectDealer"
+                               VBox.vgrow="ALWAYS">
+
+                        <columns>
+
+                            <TableColumn fx:id="dealerIdColumn"
+                                         text="Dealer ID"
+                                         prefWidth="100"/>
+
+                            <TableColumn fx:id="dealerNameColumn"
+                                         text="Dealer Name"
+                                         prefWidth="220"/>
+
+                            <TableColumn fx:id="phoneColumn"
+                                         text="Phone"
+                                         prefWidth="150"/>
+
+                            <TableColumn fx:id="locationColumn"
+                                         text="Location"
+                                         prefWidth="160"/>
+
+                        </columns>
+
+                    </TableView>
+
+
+                    <!-- Dealer Form -->
+                    <Label text="Dealer Details"
+                           style="-fx-font-size:16px; -fx-font-weight:bold;"/>
+
+                    <GridPane hgap="10" vgap="10">
+
+                        <Label text="Dealer ID:"
+                               GridPane.rowIndex="0"
+                               GridPane.columnIndex="0"/>
+
+                        <TextField fx:id="dealerIdField"
+                                   promptText="D101"
+                                   GridPane.rowIndex="0"
+                                   GridPane.columnIndex="1"/>
+
+
+                        <Label text="Dealer Name:"
+                               GridPane.rowIndex="0"
+                               GridPane.columnIndex="2"/>
+
+                        <TextField fx:id="dealerNameField"
+                                   promptText="Dealer name"
+                                   GridPane.rowIndex="0"
+                                   GridPane.columnIndex="3"/>
+
+
+                        <Label text="Phone:"
+                               GridPane.rowIndex="1"
+                               GridPane.columnIndex="0"/>
+
+                        <TextField fx:id="dealerPhoneField"
+                                   promptText="0771234567"
+                                   GridPane.rowIndex="1"
+                                   GridPane.columnIndex="1"/>
+
+
+                        <Label text="Location:"
+                               GridPane.rowIndex="1"
+                               GridPane.columnIndex="2"/>
+
+                        <TextField fx:id="dealerLocationField"
+                                   promptText="Malabe"
+                                   GridPane.rowIndex="1"
+                                   GridPane.columnIndex="3"/>
+
+                    </GridPane>
+
+
+                    <!-- Dealer Buttons -->
+                    <HBox spacing="10">
+
+                        <Button text="Load Dealers"
+                                onAction="#loadDealers"/>
+
+                        <Button text="Add Dealer"
+                                onAction="#addDealer"/>
+
+                        <Button text="Update Dealer"
+                                onAction="#updateDealer"/>
+
+                        <Button text="Delete Dealer"
+                                onAction="#deleteDealer"/>
+
+                        <Button text="Random 4 Dealers"
+                                onAction="#randomDealer"/>
+
+                    </HBox>
+
+
+                    <!-- Dealer Search -->
+                    <HBox spacing="10">
+
+                        <TextField fx:id="dealerSearchField"
+                                   promptText="Search dealer by ID, name or location"
+                                   HBox.hgrow="ALWAYS"/>
+
+                        <Button text="Search Dealer"
+                                onAction="#searchDealer"/>
+
+                    </HBox>
+
+                </VBox>
+
+            </Tab>
+
+
+            <!-- ================= CART TAB ================= -->
+            <Tab text="Shopping Cart">
+
+                <VBox spacing="12"
+                      style="-fx-padding:15;">
+
+                    <Label text="Point of Sale - Shopping Cart"
+                           style="-fx-font-size:20px; -fx-font-weight:bold;"/>
+
+
+                    <!-- Cart Table -->
+                    <TableView fx:id="cartTable"
+                               VBox.vgrow="ALWAYS">
+
+                        <columns>
+
+                            <TableColumn fx:id="cartPartColumn"
+                                         text="Part Name"
+                                         prefWidth="250"/>
+
+                            <TableColumn fx:id="cartQuantityColumn"
+                                         text="Quantity"
+                                         prefWidth="120"/>
+
+                            <TableColumn fx:id="cartPriceColumn"
+                                         text="Total Price"
+                                         prefWidth="150"/>
+
+                        </columns>
+
+                    </TableView>
+
+
+                    <!-- Cart Controls -->
+                    <HBox spacing="10">
+
+                        <TextField fx:id="cartQuantityField"
+                                   promptText="Quantity"
+                                   prefWidth="120"/>
+
+                        <Button text="Add To Cart"
+                                onAction="#addToCart"/>
+
+                        <Button text="Clear Cart"
+                                onAction="#clearCart"/>
+
+                        <Button text="Checkout"
+                                onAction="#checkout"/>
+
+                    </HBox>
+
+
+                    <!-- Discount Information -->
+                    <HBox spacing="10">
+
+                        <TextField fx:id="discountField"
+                                   promptText="Discount %"
+                                   prefWidth="150"/>
+
+                        <Button text="Apply Discount"
+                                onAction="#applyDiscount"/>
+
+                    </HBox>
+
+
+                    <Label fx:id="cartTotalLabel"
+                           text="Total: Rs. 0.00"
+                           style="-fx-font-size:18px; -fx-font-weight:bold;"/>
+
+                </VBox>
+
+            </Tab>
+
+        </TabPane>
 
     </center>
 
-    <bottom>
-        <VBox spacing="10" style="-fx-padding:10;">
-
-            <HBox spacing="10">
-
-                <TextField fx:id="codeField" promptText="Part Code"/>
-
-                <TextField fx:id="nameField" promptText="Part Name"/>
-
-                <TextField fx:id="brandField" promptText="Brand"/>
-
-                <TextField fx:id="priceField" promptText="Price"/>
-
-                <TextField fx:id="quantityField" promptText="Quantity"/>
-
-                <TextField fx:id="categoryField" promptText="Category"/>
-
-            </HBox>
-
-            <HBox spacing="10">
-
-
-                <TextField fx:id="dealerIdField" promptText="Dealer ID"/>
-
-                <TextField fx:id="dealerNameField" promptText="Dealer Name"/>
-
-                <TextField fx:id="phoneField" promptText="Phone"/>
-
-                <TextField fx:id="locationField" promptText="Location"/>
-
-                <TextField fx:id="dealerSearchField" promptText="Search Dealer"/>
-
-            </HBox>
-
-            <HBox spacing="10">
-
-                <TextField fx:id="cartQuantityField"
-                           promptText="Cart Quantity"/>
-
-                <Button text="Add To Cart"
-                        onAction="#addToCart"/>
-
-                <Button text="Clear Cart"
-                        onAction="#clearCart"/>
-
-                <Button text="Checkout"
-                        onAction="#checkout"/>
-
-                <TextField fx:id="discountField"
-                        promptText="Enter discount %"/>
-
-                <Button text="Apply Discount"
-                        onAction="#applyDiscount"/>
-
-            </HBox>
-
-
-            <Label fx:id="cartTotalLabel"
-                   text="Total: Rs.0.00"/>
-
-            <HBox spacing="10">
-
-                <Button text="Load Inventory"
-                        onAction="#loadInventory"/>
-
-                <Button text="Group Inventory"
-                        onAction="#groupInventory"/>
-
-                <Button text="Add Part"
-                        onAction="#addPart"/>
-
-                <Button text="Update"
-                        onAction="#updatePart"/>
-
-                <Button text="Delete"
-                        onAction="#deletePart"/>
-
-                <TextField fx:id="searchField"
-                           promptText="Search..."/>
-
-                <Button text="Search"
-                        onAction="#searchPart"/>
-
-                <Button text="Sort"
-                        onAction="#sortParts"/>
-
-                <Button text="Low Stock"
-                        onAction="#showLowStock"/>
-
-                <Button text="Total Parts"
-                        onAction="#showTotalParts"/>
-
-                <Button text="Inventory Value"
-                        onAction="#showTotalInventoryValue"/>
-
-            </HBox>
-
-            <Label fx:id="lowStockLabel"
-                   text="Low Stock Items : 0"/>
-
-            <Label fx:id="totalPartsLabel"
-                   text="Total Parts : 0"/>
-
-            <Label fx:id="totalValueLabel"
-                   text="Total Inventory Value : Rs. 0.00"/>
-
-            <HBox spacing="10">
-
-                <Button text="Load Dealers"
-                        onAction="#loadDealers"/>
-
-                <Button text="Add Dealer"
-                        onAction="#addDealer"/>
-
-                <Button text="Update Dealer"
-                        onAction="#updateDealer"/>
-
-                <Button text="Delete Dealer"
-                        onAction="#deleteDealer"/>
-
-                <Button text="Random Dealer"
-                        onAction="#randomDealer"/>
-
-            </HBox>
-
-            <Button text="Load Dealers"
-                    onAction="#loadDealers"/>
-
-            <Button text="Random Dealer"
-                    onAction="#randomDealer"/>
-
-        </VBox>
-    </bottom>
-
 </BorderPane>
-
-
