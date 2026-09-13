@@ -152,3 +152,106 @@ Part Added To Cart
 2026-07-28T18:41:08.174528200 : Checkout completed. Total: Rs. 9000.0
 2026-07-28T18:48:59.585560500 : JUnit Test Log
 2026-07-28T20:27:13.800628600 : Program Started
+2026-08-13T10:48:12.613071100 : Program Started
+2026-08-13T10:48:26.721448500 : Dealer list loaded
+2026-08-13T10:49:42.483723600 : Part Added
+2026-08-13T10:51:30.809194800 : Part Added
+2026-08-13T10:55:34.937350800 : Part Updated
+2026-08-13T10:56:12.311391800 : Part Deleted
+2026-08-13T10:56:12.318956100 : Deleted Part : P008
+2026-08-13T11:00:09.916479900 : Random 4 Dealers Selected
+2026-08-13T11:05:57.814796200 : Added to cart: TVS King Brake Pad Quantity: 1
+2026-08-13T11:05:57.819465700 : Part Added To Cart
+2026-08-13T11:06:06.631155500 : Added to cart: TVS King Brake Pad Quantity: 4
+2026-08-13T11:06:06.633351200 : Part Added To Cart
+2026-08-13T11:06:21.983400200 : Checkout completed. Total: Rs. 6000.0
+2026-09-13T16:39:51.230828 : Program Started
+2026-09-13T16:39:53.159340500 : Program Started
+2026-09-13T16:39:55.507385700 : Program Started
+2026-09-13T16:40:12.908398700 : Dealer list loaded
+2026-09-13T16:41:11.555780300 : Part Added
+2026-09-13T16:41:40.767408700 : Checkout completed. Total: Rs. 0.0
+2026-09-13T16:41:50.534785900 : Random 4 Dealers Selected
+2026-09-13T16:41:51.539071500 : Random 4 Dealers Selected
+2026-09-13T16:41:51.762340 : Random 4 Dealers Selected
+2026-09-13T16:41:53.280928200 : Random 4 Dealers Selected
+2026-09-13T16:41:53.507603400 : Random 4 Dealers Selected
+2026-09-13T16:41:56.016264700 : Random 4 Dealers Selected
+2026-09-13T16:44:11.202830 : Program Started
+2026-09-13T16:44:36.583256 : Dealer list loaded
+2026-09-13T16:45:49.922330900 : Part Added
+2026-09-13T16:46:18.714910500 : Part Updated
+2026-09-13T16:46:40.191224200 : Inventory Sorted
+2026-09-13T16:46:41.124843800 : Inventory Search
+2026-09-13T16:46:42.744236100 : Inventory Search
+2026-09-13T16:46:55.712938400 : Inventory Search
+2026-09-13T16:47:32.383972 : Inventory Sorted
+2026-09-13T16:47:33.232922900 : Inventory Search
+2026-09-13T16:47:48.805681 : Added to cart: 205/50-10 Tyre Quantity: 1
+2026-09-13T16:47:48.807150400 : Part Added To Cart
+2026-09-13T16:47:54.656367600 : Added to cart: Clutch Cable Bajaj RE Quantity: 2
+2026-09-13T16:47:54.657678 : Part Added To Cart
+2026-09-13T16:47:59.708472800 : Added to cart: Headlight Bulb 12V Quantity: 2
+2026-09-13T16:47:59.709484700 : Part Added To Cart
+2026-09-13T16:48:13.223247900 : Checkout completed. Total: Rs. 8370.0
+2026-09-13T16:56:32.188550900 : Program Started
+2026-09-13T16:56:53.609695100 : Dealer list loaded
+2026-09-13T16:56:59.568719200 : Dealer Added
+2026-09-13T16:57:01.437749600 : Dealer Added
+2026-09-13T16:57:11.113330900 : Dealer Added
+2026-09-13T16:57:53.882974800 : Part Added : P011
+2026-09-13T16:58:09.491736400 : Part Updated : P011
+2026-09-13T16:58:19.365886800 : Part Deleted : P011
+2026-09-13T16:58:31.704300500 : Part Updated : P009
+2026-09-13T16:58:39.379347 : Dealer Added
+2026-09-13T16:59:17.930106400 : Dealer Added
+2026-09-13T16:59:19.514791700 : Dealer Added
+2026-09-13T16:59:45.693981 : Dealer Updated
+2026-09-13T16:59:49.734026900 : Dealer Deleted
+2026-09-13T16:59:53.632115300 : Random 4 Dealers Selected
+2026-09-13T16:59:54.729765500 : Random 4 Dealers Selected
+2026-09-13T16:59:55.181785200 : Random 4 Dealers Selected
+2026-09-13T17:00:01.624127400 : Dealer list loaded
+2026-09-13T17:00:07.757056100 : Random 4 Dealers Selected
+2026-09-13T17:00:12.083689200 : Dealer list loaded
+2026-09-13T17:00:15.864039600 : Random 4 Dealers Selected
+2026-09-13T17:00:29.646233 : Inventory Search
+2026-09-13T17:00:37.355556100 : Inventory Sorted
+2026-09-13T17:00:38.897153400 : Inventory Sorted
+2026-09-13T17:00:59.249275300 : Inventory Sorted
+2026-09-13T17:01:21.218348 : Inventory Sorted
+2026-09-13T17:01:23.112048200 : Inventory Sorted
+2026-09-13T17:01:31.112974500 : Inventory Sorted
+2026-09-13T17:01:32.104633 : Inventory Sorted
+2026-09-13T17:01:32.312838900 : Inventory Sorted
+2026-09-13T17:01:32.511052400 : Inventory Sorted
+2026-09-13T17:01:32.688880 : Inventory Sorted
+2026-09-13T17:01:32.875140700 : Inventory Sorted
+2026-09-13T17:01:33.052915600 : Inventory Sorted
+2026-09-13T17:01:33.208781800 : Inventory Sorted
+2026-09-13T17:01:33.922068 : Inventory Sorted
+2026-09-13T17:01:34.377241600 : Inventory Sorted
+2026-09-13T17:01:34.555554700 : Inventory Sorted
+2026-09-13T17:01:34.746459 : Inventory Sorted
+2026-09-13T17:01:34.939375800 : Inventory Sorted
+2026-09-13T17:01:35.162279200 : Inventory Sorted
+2026-09-13T17:01:38.985055600 : Inventory Sorted
+2026-09-13T17:01:39.176920200 : Inventory Sorted
+2026-09-13T17:01:39.355927600 : Inventory Sorted
+2026-09-13T17:01:39.546102900 : Inventory Sorted
+2026-09-13T17:01:39.732647400 : Inventory Sorted
+2026-09-13T17:01:39.959233800 : Inventory Sorted
+2026-09-13T17:01:40.409972900 : Inventory Sorted
+2026-09-13T17:01:42.255453900 : Inventory Sorted
+2026-09-13T17:01:43.700529500 : Inventory Sorted
+2026-09-13T17:01:44.213591400 : Inventory Sorted
+2026-09-13T17:01:56.553339300 : Part Added To Cart : P003 Quantity: 1
+2026-09-13T17:02:02.824023 : Part Added To Cart : P004 Quantity: 10
+2026-09-13T17:02:12.539768900 : Part Added To Cart : P001 Quantity: 2
+2026-09-13T17:02:35.370726400 : Checkout completed. Total: Rs. 21217.5
+2026-09-13T17:02:36.164672700 : Checkout completed. Total: Rs. 21217.5
+2026-09-13T17:02:36.383444300 : Checkout completed. Total: Rs. 21217.5
+2026-09-13T17:02:36.855865 : Checkout completed. Total: Rs. 21217.5
+2026-09-13T17:02:37.025037400 : Checkout completed. Total: Rs. 21217.5
+2026-09-13T17:02:37.197984500 : Checkout completed. Total: Rs. 21217.5
+2026-09-13T17:02:37.421692800 : Checkout completed. Total: Rs. 21217.5
